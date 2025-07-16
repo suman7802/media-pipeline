@@ -2,14 +2,15 @@
     "compilerOptions": {
         "module": "CommonJS",
         "target": "ES2019",
-        "baseUrl": "./src",
+        "baseUrl": "./",
         "paths": {
-            "@/*": ["*"]
+            "@/*": ["src/*"]
         },
         "outDir": "build",
         "esModuleInterop": true,
         "moduleResolution": "node",
         "skipLibCheck": true,
+        "resolveJsonModule": true,
         "strict": true
     },
     "include": ["src"]

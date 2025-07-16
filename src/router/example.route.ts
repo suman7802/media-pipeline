@@ -15,6 +15,7 @@ exampleRouter.post('/file-upload', upload.single('example_file'), fileUploadExam
 exampleRouter.get('/slow-down', slowDownApi, slowDownExample);
 exampleRouter.get('/api-key', verifyApiKey, exampleVerifyApiKey);
 exampleRouter.get('/localization', exampleLocalization);
+
 exampleRouter.get('/metrics', validateSchema(metricsSchema), exampleMetrics);
 
 export { exampleRouter };

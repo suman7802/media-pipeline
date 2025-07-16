@@ -93,6 +93,7 @@ export const fileUploadExample = asyncCatch(async (req: Request, res: Response) 
 export const exampleMetrics = asyncCatch(async (req: Request<{}, {}, {}, metricsType['query']>, res: Response) => {
     const t = req.t;
     const { loop } = req.query;
+
     // convert the count and loop to number
     const loopNumber = Number(loop);
     let Loop = 0;
