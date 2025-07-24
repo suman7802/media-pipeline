@@ -24,6 +24,7 @@ export default [
             'simple-import-sort/exports': 'error',
             '@typescript-eslint/no-unused-vars': 'off',
             '@typescript-eslint/no-empty-object-type': 'off',
+            '@typescript-eslint/no-explicit-any': 'off',
             'simple-import-sort/imports': ['error', { groups: [['^node:'], ['^express$', '^@?\\w'], ['^@'], ['^\\.']] }],
         },
     },
