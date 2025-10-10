@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 
-import { env } from '@/config/env';
 import { ERROR_CODES } from '@/constant/error.codes';
 import { STATUS_CODES } from '@/constant/status.codes';
 import { sendEmail } from '@/email/sendgrid';
@@ -42,10 +41,14 @@ export const sendEmailExample = asyncCatch(async (req: Request<{}, {}, sendEmail
 
     // Sending email
     const [emailResponse] = await sendEmail(req, {
-        templateId: env.template.TEMPLATE_WELCOME,
-
         to: payload.to,
-        dynamicTemplateData: payload.dynamicTemplateData,
+        subject: 'Express Template',
+        templatePath: 'public/welcome.template.html',
+        dynamicData: {
+            name: payload.dynamicTemplateData.name,
+            role: payload.dynamicTemplateData.role,
+            year: new Date().getFullYear(),
+        },
     });
 
     customSuccessResponse(res, 200, t('email_sent'), emailResponse);
@@ -82,6 +85,8 @@ export const fileUploadExample = asyncCatch(async (req: Request, res: Response) 
             t('file_not_found_suggestion', { ns: 'error' }),
         );
     }
+
+    // Do your Operations with file
 
     customSuccessResponse(res, 200, t('file_upload'), {
         file: file.originalname,

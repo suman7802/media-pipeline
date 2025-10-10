@@ -1,3 +1,23 @@
+## 1.5.0 - 2025-10-10
+
+1. #### Updated build script
+    - Changed `"build": "tsc --build && tsc-alias"` to `"build": "tsc && resolve-tspaths"`
+
+2. #### Updated email sending logic
+    - Switched from using template IDs to Handlebars local templates
+    - Removed template IDs from environment files
+
+3. #### Lint-staged optimization
+    - Improved lint-staged commands for faster and more efficient pre-commit checks
+    - Reduced unnecessary file scanning and formatting overhead
+
+4. #### Updated translations
+    - Updated `locales/en/translation.json`
+
+5. #### Minor configuration updates
+    - Tweaked project configs for better performance and maintainability
+    - Updated some internal settings and environment defaults
+
 ## 1.4.0 - 2025-07-16
 
     > Added multer config

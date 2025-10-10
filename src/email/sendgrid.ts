@@ -25,7 +25,7 @@ export const sendEmail = async (req: Request, options: SendLocalEmailOptions) =>
         const templateFile = path.resolve(
             __dirname,
             '../email/templates',
-            options.templatePath, // supports nested paths like 'admin/register.template.html'
+            options.templatePath, // supports nested paths like 'example/notification.template.html'
         );
 
         const templateContent = await fs.readFile(templateFile, 'utf-8');
