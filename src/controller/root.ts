@@ -7,7 +7,6 @@ import { ApiError } from '@/error/ApiError';
 import asyncCatch from '@/error/asyncCatch';
 import { customSuccessResponse } from '@/utils/customSuccessResponse';
 
-// @ts-expect-error: ignore it
 import packageJson from '../../package.json';
 
 const appName = packageJson.name;

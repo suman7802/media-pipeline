@@ -9,7 +9,6 @@ import tseslint from 'typescript-eslint';
 export default [
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
-    eslintConfigPrettier,
     {
         files: ['**/*.{js,mjs,cjs,ts}'],
         languageOptions: { globals: globals.browser },
@@ -24,7 +23,9 @@ export default [
             'simple-import-sort/exports': 'error',
             '@typescript-eslint/no-unused-vars': 'off',
             '@typescript-eslint/no-empty-object-type': 'off',
+            '@typescript-eslint/no-explicit-any': 'off',
             'simple-import-sort/imports': ['error', { groups: [['^node:'], ['^express$', '^@?\\w'], ['^@'], ['^\\.']] }],
         },
     },
+    eslintConfigPrettier,
 ];

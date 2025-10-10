@@ -1,13 +1,12 @@
 services:
     server:
         build: .
+        container_name: main-server
         command: pm2-runtime ecosystem.config.js --env production
         ports:
             - '8080:8080'
         environment:
             - NODE_ENV=production
-        volumes:
-            - ./:/app
         restart: always
 
     prometheus:

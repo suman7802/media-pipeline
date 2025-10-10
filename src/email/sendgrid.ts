@@ -1,45 +1,43 @@
 import { Request } from 'express';
 import sgMail from '@sendgrid/mail';
+import fs from 'fs/promises';
+import Handlebars from 'handlebars';
+import path from 'path';
 
 import { env } from '@/config/env';
 import { ERROR_CODES } from '@/constant/error.codes';
 import { STATUS_CODES } from '@/constant/status.codes';
 import { ApiError } from '@/error/ApiError';
 import logger from '@/logger/winston.logger';
-import { twiloSendgridType } from '@/schema/sendgrid.schema';
 
 sgMail.setApiKey(env.sendgrid.SEND_GRID_API_KEY);
+interface SendLocalEmailOptions {
+    to: string;
+    subject: string;
+    templatePath: string;
+    dynamicData: Record<string, any>;
+}
 
-/**
- * @description Send email using SendGrid
- *
- * @param {Request} req - Express request object (used for translations)
- * @param {twiloSendgridType} payload - The email options
- * @param {string} payload.to - Recipient email address
- * @param {string} payload.templateId - SendGrid template ID
- * @param {object} payload.dynamicTemplateData - Dynamic data for the template
- *
- * @returns {Promise<void>}
- * @throws {ApiError} Throws an ApiError with translated messages if sending email fails
- *
- * @example
- * await sendEmail(req, {
- *   to: 'recipient@example.com',
- *   templateId: 'd-template-id-from-sendgrid',
- *   dynamicTemplateData: { name: 'John', resetLink: 'https://example.com/reset' }
- * });
- *
- * @see https://www.twilio.com/docs/sendgrid/for-developers/sending-email/quickstart-nodejs
- * @see https://app.sendgrid.com/guide
- */
-export const sendEmail = async (req: Request, payload: twiloSendgridType) => {
+export const sendEmail = async (req: Request, options: SendLocalEmailOptions) => {
     const t = req.t;
+
     try {
+        const templateFile = path.resolve(
+            __dirname,
+            '../email/templates',
+            options.templatePath, // supports nested paths like 'example/notification.template.html'
+        );
+
+        const templateContent = await fs.readFile(templateFile, 'utf-8');
+
+        const compiledTemplate = Handlebars.compile(templateContent);
+        const htmlContent = compiledTemplate(options.dynamicData);
+
         return await sgMail.send({
+            to: options.to,
             from: env.sendgrid.SEND_GRID_FROM_EMAIL,
-            to: payload.to,
-            templateId: payload.templateId,
-            dynamicTemplateData: payload.dynamicTemplateData,
+            subject: options.subject,
+            html: htmlContent,
         });
     } catch (error) {
         logger.error(error);

@@ -57,7 +57,7 @@ dist/
 !.env.example
 
 # temporary files
-*.tmp.*
+*.temp.*
 
 # logs directory
 logs/

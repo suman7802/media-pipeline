@@ -16,11 +16,10 @@ i18next
             loadPath: './locales/{{lng}}/{{ns}}.json', // Translation files path
         },
         detection: {
-            order: ['querystring', 'cookie', 'header'], // Where to look for language (Priority order)
+            order: ['querystring', 'header'], // Where to look for language (Priority order)
             lookupQuerystring: 'lng', // Query parameter name, e.g., ?lng=ne
             lookupCookie: 'i18next', // Cookie name where the language is stored
             lookupHeader: 'accept-language', // Header to look for language
-            caches: ['cookie'], // Cache language in cookies
         },
         interpolation: {
             escapeValue: true, // Escape HTML (XSS protection) (make it false if you need to render HTML)

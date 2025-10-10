@@ -5,7 +5,7 @@ module.exports = {
             name: 'expressTemplate',
             instances: 'max',
             exec_mode: 'cluster',
-            script: './build/src/server.js',
+            script: './build/server.js',
             env: {
                 NODE_ENV: 'development',
                 PORT: 8080,

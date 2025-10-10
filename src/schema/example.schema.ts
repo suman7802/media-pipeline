@@ -11,7 +11,7 @@ export type sendEmailType = z.infer<typeof sendEmailSchema>;
 
 export const metricsSchema = z.object({
     query: z.object({
-        loop: z.string().default('0'),
+        loop: z.coerce.number().int().nonnegative().max(60).default(0),
     }),
 });
 

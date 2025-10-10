@@ -73,14 +73,15 @@ docker-compose up
 - Multer
 - API key emplemantation
 - Sending Emails (sendgrid)
+- local email templates (handlebars)
 - Metrics (Analytics)
 - Prometheus (containerized)
 - Grafana (containerized)
+- Conterization
 
 # Features to be added
 
 - Testing
-- Conterization
 - Authentication (passport.js)
 - Authorization
 - Grafana Loki

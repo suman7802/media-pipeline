@@ -44,10 +44,6 @@ export const envSchema = z.object({
         SEND_GRID_API_KEY: z.string(),
         SEND_GRID_FROM_EMAIL: z.string().email(),
     }),
-
-    template: z.object({
-        TEMPLATE_WELCOME: z.string(),
-    }),
 });
 
 export type envType = z.TypeOf<typeof envSchema>;

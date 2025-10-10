@@ -7,7 +7,7 @@ import { ApiError } from '@/error/ApiError';
 import logger from '@/logger/winston.logger';
 
 export default function validateSchema(schema: z.AnyZodObject) {
-    return function (req: Request, res: Response, next: NextFunction) {
+    return function (req: Request<{}, {}, {}, {}>, res: Response, next: NextFunction) {
         const t = req.t;
 
         try {

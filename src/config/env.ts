@@ -34,10 +34,6 @@ const parsedEnv = envSchema.safeParse({
         SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
         SEND_GRID_FROM_EMAIL: process.env.SEND_GRID_FROM_EMAIL,
     },
-
-    template: {
-        TEMPLATE_WELCOME: process.env.TEMPLATE_WELCOME,
-    },
 });
 
 /**
