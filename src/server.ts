@@ -1,7 +1,11 @@
+import http from 'http';
+
 import app from '@/app';
-import { env } from '@/config/env';
-import logger from '@/logger/winston.logger';
-import { getLocalIp } from '@/utils/getLocalIp';
+import { env } from '@/configs/env';
+import logger from '@/loggers/winston.logger';
+import { getLocalIp } from '@/utils/getLocalIp.util';
+
+const server = http.createServer(app);
 
 const startServer = () => {
     try {
@@ -13,7 +17,7 @@ const startServer = () => {
          */
 
         // initialize the server
-        const server = app.listen(env.app.PORT, () => {
+        server.listen(env.app.PORT, () => {
             logger.info(
                 `\nServer is running on ${env.app.NODE_ENV} mode\n- Local   ${`http://localhost:${env.app.PORT}\n- Netwrok ${`http://${getLocalIp()}:${env.app.PORT}`}`}`,
             );

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Chunked Video Test</title>
+        <style>
+            body {
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    'Segoe UI',
+                    sans-serif;
+                padding: 20px;
+                background: #111;
+                color: #eee;
+            }
+            .player-container {
+                max-width: 900px;
+                margin: 0 auto;
+            }
+            video {
+                width: 100%;
+                max-height: 70vh;
+                background: #000;
+            }
+            .controls {
+                margin-top: 10px;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            select,
+            button {
+                padding: 4px 8px;
+                border-radius: 4px;
+                border: 1px solid #444;
+                background: #222;
+                color: #eee;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="player-container">
+            <h1>Media Pipeline Video Player</h1>
+
+            <!-- The browser will automatically send Range requests to this src -->
+            <video
+                id="videoPlayer"
+                controls
+            ></video>
+
+            <div class="controls">
+                <label for="qualitySelect">Quality:</label>
+                <select id="qualitySelect">
+                    <option value="240p">240p</option>
+                    <option value="360p">360p</option>
+                    <option value="480p">480p</option>
+                    <option value="720p">720p</option>
+                    <option
+                        value="1080p"
+                        selected
+                    >
+                        1080p
+                    </option>
+                    <option
+                        value="1440p"
+                        selected
+                    >
+                        1440p
+                    </option>
+                    <option
+                        value="2160p"
+                        selected
+                    >
+                        2160p
+                    </option>
+                </select>
+
+                <button id="reloadBtn">Reload</button>
+                <span
+                    id="status"
+                    style="font-size: 0.9rem; opacity: 0.8"
+                ></span>
+            </div>
+        </div>
+
+        <script>
+            const BASE_URL = 'http://localhost:8080/api/v0/media/video';
+            const MEDIA_ID = '01K9YPRNBZWF2T03SQP1S376H4';
+
+            const video = document.getElementById('videoPlayer');
+            const qualitySelect = document.getElementById('qualitySelect');
+            const reloadBtn = document.getElementById('reloadBtn');
+            const status = document.getElementById('status');
+
+            function buildStreamUrl(quality) {
+                return `${BASE_URL}/${MEDIA_ID}/stream?quality=${encodeURIComponent(quality)}`;
+            }
+
+            function loadVideo(quality, keepTime = false) {
+                const currentTime = video.currentTime;
+                const src = buildStreamUrl(quality);
+
+                status.textContent = `Loading ${quality}…`;
+                video.src = src; // <== NO manual Range header here
+                video.load();
+
+                video.onloadedmetadata = () => {
+                    if (keepTime && currentTime > 0 && currentTime < video.duration) {
+                        video.currentTime = currentTime;
+                    }
+                    video.play().catch(() => {});
+                    status.textContent = `Playing ${quality}`;
+                };
+
+                video.onerror = (err) => {
+                    console.error('Video load error:', err);
+                    status.textContent = `Error loading ${quality}. Check backend URL / CORS / manifest.`;
+                };
+            }
+
+            // Change quality while playing
+            qualitySelect.addEventListener('change', (e) => {
+                const quality = e.target.value;
+                loadVideo(quality, true);
+            });
+
+            // Manual reload button
+            reloadBtn.addEventListener('click', () => {
+                loadVideo(qualitySelect.value, false);
+            });
+
+            // Initial load
+            loadVideo(qualitySelect.value);
+        </script>
+    </body>
+</html>

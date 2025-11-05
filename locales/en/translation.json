@@ -2,6 +2,7 @@
     "welcome": "Welcome to the API",
     "good_api_health_check": "API is healthy",
     "api_slow_down_test": "API slow down test",
+    "media_added_to_queue": "Media added to processing queue",
     "no_delay": "No delay",
     "request_being_slowed_down": "Request is being slowed down",
     "email_sent": "Email sent",
@@ -15,5 +16,6 @@
     "file_uploaded_message": "File uploaded successfully",
     "metrics_api": "Metrics API",
     "metrics_api_message": "You can view the API metrics",
-    "metrics_api_loop_message": "Metrics API: {{time}} seconds (Loop {{loop}})"
+    "metrics_api_loop_message": "Metrics API: {{time}} seconds (Loop {{loop}})",
+    "video_streaming": "Video streaming"
 }

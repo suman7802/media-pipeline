@@ -8,14 +8,14 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import requestIp from 'request-ip';
 
-import { env } from '@/config/env';
-import { metrics, prometheus } from '@/metrics/prometheus';
-import { apiErrorHandler } from '@/middleware/apiErrorHandler';
-import i18nMiddleware from '@/middleware/i18Next';
-import { rateLimiter } from '@/middleware/rate-limiter';
-import { routeNotFoundHandler } from '@/middleware/route.not.found';
-import router from '@/router/index';
-import { rootRouter } from '@/router/root.route';
+import { env } from '@/configs/env';
+import { metrics, prometheus } from '@/metrics/prometheus.metric';
+import { apiErrorHandler } from '@/middlewares/apiErrorHandler.middleware';
+import i18nMiddleware from '@/middlewares/i18Next.middleware';
+import { rateLimiter } from '@/middlewares/rate-limiter.middleware';
+import { routeNotFoundHandler } from '@/middlewares/route-not-found.middleware';
+import router from '@/routers/index';
+import { rootRouter } from '@/routers/root.route';
 
 /**
  * Initialize Express application
@@ -42,14 +42,23 @@ app.use(i18nMiddleware); // Adds internationalization support
  * SECURITY MIDDLEWARE
  * Protection-related middleware to secure the application
  */
-app.use(helmet()); // Sets various HTTP headers for security
+app.use(
+    helmet({
+        contentSecurityPolicy: false, // disable CSP for simplicity; customize as needed
+    }),
+);
+
 app.use(
     cors({
         // Cross-Origin Resource Sharing configuration
         origin: env.app.CLIENT_URL,
+        methods: ['GET', 'POST', 'HEAD', 'OPTIONS', 'PUT', 'DELETE', 'PATCH'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,
+        exposedHeaders: ['Content-Range', 'Accept-Ranges', 'Content-Length'],
     }),
 );
+
 app.use(rateLimiter); // Limits request rate to prevent abuse
 
 /**
@@ -79,11 +88,13 @@ app.use(morgan(env.app.LOG_LEVEL)); // HTTP request logger
  */
 app.use(prometheus);
 
+//serve static directory
+app.use('/public', express.static('public'));
+
 /**
  * ROUTES
  * Application routes and API endpoints
  */
-
 app.get('/metrics', metrics); // Exposes application metrics
 app.use('/', rootRouter); // Base routes
 app.use('/api/v0', router); // API v0 routes

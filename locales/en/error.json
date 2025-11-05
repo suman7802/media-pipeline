@@ -25,5 +25,14 @@
     "file_not_found_message": "File not found.",
     "file_not_found_details": "The file you are trying to access does not exist.",
     "file_not_found_suggestion": "Please check the file path and try again.",
-    "schema_validation_error": "Schema validation error."
+    "schema_validation_error": "Schema validation error.",
+    "media_not_found_message": "Media not found.",
+    "media_not_found_details": "The requested media could not be found.",
+    "media_not_found_suggestion": "Please check the media ID and try again.",
+    "internal_error_message": "Internal server error.",
+    "internal_error_details": "An unexpected error occurred on the server.",
+    "internal_error_suggestion": "Please try again later or contact support if the issue persists.",
+    "range_not_satisfiable_message": "Requested range not satisfiable.",
+    "range_not_satisfiable_details": "The requested range cannot be satisfied by the server.",
+    "range_not_satisfiable_suggestion": "Please check the range header and try again."
 }

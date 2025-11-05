@@ -25,5 +25,14 @@
     "file_not_found_message": "फाइल फेला परेन।",
     "file_not_found_details": "तपाईंले पहुँच गर्न खोजिरहेको फाइल अवस्थित छैन।",
     "file_not_found_suggestion": "कृपया फाइल पथ जाँच गर्नुहोस् र पुन: प्रयास गर्नुहोस्।",
-    "schema_validation_error": "Schema मान्यकरण त्रुटि।"
+    "schema_validation_error": "Schema मान्यकरण त्रुटि।",
+    "media_not_found_message": "मिडिया फेला परेन।",
+    "media_not_found_details": "अनुरोध गरिएको मिडिया फेला परेन।",
+    "media_not_found_suggestion": "कृपया मिडिया ID जाँच गर्नुहोस् र पुन: प्रयास गर्नुहोस्।",
+    "internal_error_message": "आन्तरिक सर्भर त्रुटि।",
+    "internal_error_details": "सर्भरमा अप्रत्याशित त्रुटि भयो।",
+    "internal_error_suggestion": "कृपया पछि पुन: प्रयास गर्नुहोस् वा समस्या जारी रहेमा समर्थनलाई सम्पर्क गर्नुहोस्।",
+    "range_not_satisfiable_message": "अनुरोध गरिएको दायरा सन्तुष्ट छैन।",
+    "range_not_satisfiable_details": "तपाईंले अनुरोध गरेको दायरा उपलब्ध फाइल साइज भित्र छैन।",
+    "range_not_satisfiable_suggestion": "कृपया दायरा हेडर जाँच गर्नुहोस् र पुन: प्रयास गर्नुहोस्।"
 }

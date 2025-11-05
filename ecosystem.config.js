@@ -2,7 +2,7 @@
 module.exports = {
     apps: [
         {
-            name: 'expressTemplate',
+            name: 'media-pipeline',
             instances: 'max',
             exec_mode: 'cluster',
             script: './build/server.js',
