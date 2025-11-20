@@ -3,7 +3,7 @@ import { Readable } from 'node:stream';
 
 import fs from 'fs';
 
-import { RangeHeader } from '@/controllers/media.controller';
+import { RangeHeader } from '@/helpers/helper';
 import { ByteMapEntry } from '@/services/chunk.service';
 
 interface RangeStreamerOptions {
