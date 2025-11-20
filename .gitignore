@@ -66,3 +66,7 @@ logs/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
+# media uploads
+/media
+/temp
