@@ -2,10 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import { ulid } from 'ulid';
 
+import { env } from '@/configs/env';
 import { ERROR_CODES } from '@/constants/error.codes';
 import { STATUS_CODES } from '@/constants/status.codes';
 import { ApiError } from '@/errors/ApiError.error';
 import asyncCatch from '@/errors/asyncCatch.error';
+import { getMediaType, parseRange } from '@/helpers/helper';
 import logger from '@/loggers/winston.logger';
 import { GetImage, PlayVideo, uploadMediaType } from '@/schemas/media.schema';
 import { initializeMedia, readManifest } from '@/services/media.service';
@@ -22,16 +24,17 @@ import { customSuccessResponse } from '@/utils/customSuccessResponse.util';
 export const handleMediaUpload = asyncCatch(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const t = req.t;
     const file = req.file!;
-    const body = req.body as uploadMediaType;
+    const { title, tags } = req.body as uploadMediaType;
 
     const mediaId = ulid();
+    const kind = getMediaType(req, file);
 
     // create the manifest.json for the uploaded media
     const manifest = await initializeMedia({
         id: mediaId,
-        title: body.title,
-        tags: body.tags || [],
-        kind: body.kind,
+        title: title,
+        tags: tags || [],
+        kind: kind,
         originalFilePath: file.path,
         originalFilename: file.originalname,
     });
@@ -39,7 +42,7 @@ export const handleMediaUpload = asyncCatch(async (req: Request, res: Response, 
     // Enqueue the media for processing at ./queue/jobs.jsonl
     await enqueue({
         mediaId,
-        kind: body.kind,
+        kind: kind,
         rawFilePath: manifest.rawFilePath!,
     });
 
@@ -108,31 +111,6 @@ export const serveImage = asyncCatch(async (req: Request, res: Response, next: N
 
     fs.createReadStream(imagePath).pipe(res);
 });
-
-export interface RangeHeader {
-    start: number;
-    end: number;
-}
-
-/**
- * Parses the HTTP Range header.
- * @param {string} rangeHeader - The value of the `Range` header (e.g., 'bytes=0-1023').
- * @param {number} totalSize - The total size of the content in bytes.
- * @returns {{ start: number; end: number } | null} The parsed start and end bytes, or null if invalid.
- */
-const parseRange = (rangeHeader: string | undefined, totalSize: number): RangeHeader | null => {
-    if (!rangeHeader) return null;
-
-    const match = rangeHeader.match(/^bytes=(\d+)-(\d*)$/);
-    if (!match) return null;
-
-    const start = parseInt(match[1], 10);
-    const end = match[2] ? parseInt(match[2], 10) : totalSize - 1;
-
-    if (isNaN(start) || isNaN(end) || start > end || start >= totalSize) return null; // Invalid range, will trigger a 416
-
-    return { start, end: Math.min(end, totalSize - 1) };
-};
 
 /**
  * Handles streaming a video rendition.
@@ -218,4 +196,35 @@ export const streamVideo = asyncCatch(async (req: Request, res: Response, next: 
         streamer.pipe(res);
         req.on('close', () => streamer.destroy());
     }
+});
+
+export const listMedias = asyncCatch(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const t = req.t;
+
+    const media = [];
+    const ids: string[] = fs.readdirSync(env.media.MEDIA_DIR);
+
+    for (const id of ids) {
+        const fullManifest = await readManifest(id);
+
+        if (!fullManifest) {
+            continue;
+        }
+
+        media.push({
+            id: fullManifest.id,
+            title: fullManifest.title,
+            tags: fullManifest.tags,
+            kind: fullManifest.kind,
+            status: fullManifest.status,
+            createdAt: fullManifest.createdAt,
+            thumbnailPath: fullManifest.thumbnailPath,
+            quality: fullManifest.kind === 'video' ? fullManifest.renditions?.slice(-1)[0]?.quality : undefined,
+        });
+    }
+
+    // Todo: implement pagination
+    customSuccessResponse(res, 200, t('media_list_fetched_successfully'), {
+        media,
+    });
 });

@@ -99,7 +99,7 @@ export const transcodeToLadder = async ({ sourcePath, outputDir }: { sourcePath:
  * @param {number} [params.timestampSeconds=2] - The point in the video to grab the frame from.
  * @returns {Promise<string>} The path to the created thumbnail.
  */
-export const extractThumbnail = async ({
+export const extractThumbnailFromVideo = async ({
     sourcePath,
     outputDir,
     timestampSeconds = 2,

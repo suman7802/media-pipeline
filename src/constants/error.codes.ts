@@ -7,4 +7,5 @@ export const ERROR_CODES = {
     NOT_FOUND: 'E005',
     INTERNAL_ERROR: 'E006',
     RANGE_NOT_SATISFIABLE: 'E007',
+    BAD_REQUEST: 'E008',
 };

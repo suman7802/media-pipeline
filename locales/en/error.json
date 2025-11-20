@@ -34,5 +34,8 @@
     "internal_error_suggestion": "Please try again later or contact support if the issue persists.",
     "range_not_satisfiable_message": "Requested range not satisfiable.",
     "range_not_satisfiable_details": "The requested range cannot be satisfied by the server.",
-    "range_not_satisfiable_suggestion": "Please check the range header and try again."
+    "range_not_satisfiable_suggestion": "Please check the range header and try again.",
+    "media_type_not_supported_message": "Media type not supported.",
+    "media_type_not_supported_details": "The media type you are trying to upload is not supported.",
+    "media_type_not_supported_suggestion": "Please upload a supported media type and try again."
 }

@@ -1,0 +1,100 @@
+{
+    "id": "01KAFYGVKV0Q3FH1JJXNS79ZH9",
+    "title": "testing_video_01",
+    "tags": ["TEST, VIDEO"],
+    "kind": "video",
+    "status": "completed",
+    "createdAt": "2025-11-20T06:16:41.344Z",
+    "originalFilename": "4K_Video_3840x2160.mp4",
+    "rawFilePath": "/Users/sumansharma/code/media-pipeline/media/01KAFYGVKV0Q3FH1JJXNS79ZH9/raw/4K_Video_3840x2160.mp4",
+    "updatedAt": "2025-11-20T06:16:59.024Z",
+    "renditions": [
+        {
+            "quality": "240p",
+            "resolution": {
+                "width": -1,
+                "height": 240
+            },
+            "contentLength": 558530,
+            "mimeType": "video/mp4",
+            "byteMap": [
+                {
+                    "offset": 0,
+                    "size": 558530,
+                    "path": "/Users/sumansharma/code/media-pipeline/media/01KAFYGVKV0Q3FH1JJXNS79ZH9/renditions/240p/chunks/000000"
+                }
+            ]
+        },
+        {
+            "quality": "360p",
+            "resolution": {
+                "width": -1,
+                "height": 360
+            },
+            "contentLength": 1106603,
+            "mimeType": "video/mp4",
+            "byteMap": [
+                {
+                    "offset": 0,
+                    "size": 1106603,
+                    "path": "/Users/sumansharma/code/media-pipeline/media/01KAFYGVKV0Q3FH1JJXNS79ZH9/renditions/360p/chunks/000000"
+                }
+            ]
+        },
+        {
+            "quality": "480p",
+            "resolution": {
+                "width": -1,
+                "height": 480
+            },
+            "contentLength": 1673801,
+            "mimeType": "video/mp4",
+            "byteMap": [
+                {
+                    "offset": 0,
+                    "size": 1673801,
+                    "path": "/Users/sumansharma/code/media-pipeline/media/01KAFYGVKV0Q3FH1JJXNS79ZH9/renditions/480p/chunks/000000"
+                }
+            ]
+        },
+        {
+            "quality": "720p",
+            "resolution": {
+                "width": -1,
+                "height": 720
+            },
+            "contentLength": 3583226,
+            "mimeType": "video/mp4",
+            "byteMap": [
+                {
+                    "offset": 0,
+                    "size": 3583226,
+                    "path": "/Users/sumansharma/code/media-pipeline/media/01KAFYGVKV0Q3FH1JJXNS79ZH9/renditions/720p/chunks/000000"
+                }
+            ]
+        },
+        {
+            "quality": "1080p",
+            "resolution": {
+                "width": -1,
+                "height": 1080
+            },
+            "contentLength": 6432534,
+            "mimeType": "video/mp4",
+            "byteMap": [
+                {
+                    "offset": 0,
+                    "size": 4194304,
+                    "path": "/Users/sumansharma/code/media-pipeline/media/01KAFYGVKV0Q3FH1JJXNS79ZH9/renditions/1080p/chunks/000000"
+                },
+                {
+                    "offset": 4194304,
+                    "size": 2238230,
+                    "path": "/Users/sumansharma/code/media-pipeline/media/01KAFYGVKV0Q3FH1JJXNS79ZH9/renditions/1080p/chunks/000001"
+                }
+            ]
+        }
+    ],
+    "thumbnailPath": "/Users/sumansharma/code/media-pipeline/media/01KAFYGVKV0Q3FH1JJXNS79ZH9/thumbs/thumbnail.jpg",
+    "chunkSize": 4194304
+}

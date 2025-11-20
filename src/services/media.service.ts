@@ -3,7 +3,8 @@ import path from 'path';
 
 import { env } from '@/configs/env';
 import { MANIFEST_FILENAME } from '@/configs/media.config';
-import { MediaKind, MediaManifest } from '@/schemas/media.schema';
+import { MediaType } from '@/helpers/helper';
+import { MediaManifest } from '@/schemas/media.schema';
 import { makeDir, safeJoin } from '@/utils/fs.util';
 
 /**
@@ -54,7 +55,7 @@ interface InitializeMediaParams {
     id: string;
     title: string;
     tags: string[];
-    kind: MediaKind;
+    kind: MediaType;
     originalFilePath: string;
     originalFilename: string;
 }

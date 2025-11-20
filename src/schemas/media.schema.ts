@@ -12,7 +12,6 @@ const ImageSizeEnum = z.coerce.number().refine((val) => IMAGE_SIZES.includes(val
 
 export const uploadMediaSchema = z.object({
     body: z.object({
-        kind: z.enum(['video', 'image']),
         title: z.string().min(1, 'Title is required').max(100),
         tags: z
             .union([z.string(), z.array(z.string())])
@@ -85,6 +84,7 @@ const ImageRenditionSchema = z.object({
 const ImageManifestSchema = BaseManifestSchema.extend({
     kind: z.literal('image'),
     images: z.array(ImageRenditionSchema).optional(),
+    thumbnailPath: z.string().optional(),
 });
 
 export const getImageSchema = z.object({
@@ -101,7 +101,6 @@ export const MediaManifestSchema = z.discriminatedUnion('kind', [VideoManifestSc
 
 export type MediaManifest = z.infer<typeof MediaManifestSchema>;
 export type uploadMediaType = z.infer<typeof uploadMediaSchema>['body'];
-export type MediaKind = z.infer<typeof uploadMediaSchema>['body']['kind'];
 export type VideoRendition = z.infer<typeof VideoRenditionSchema>;
 export type ImageSize = z.infer<typeof ImageSizeEnum>;
 export type ImageFormat = z.infer<typeof ImageFormatEnum>;

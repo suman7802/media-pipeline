@@ -7,7 +7,7 @@ import { MediaManifest, VideoRendition } from '@/schemas/media.schema';
 import { VideoJob } from '@/schemas/queue.schema';
 import { chunkFile } from '@/services/chunk.service';
 import { getMediaRoot, updateManifest } from '@/services/media.service';
-import { extractThumbnail, transcodeToLadder } from '@/services/video.service';
+import { extractThumbnailFromVideo, transcodeToLadder } from '@/services/video.service';
 
 /**
  * Processes a single video job.
@@ -56,7 +56,7 @@ export const processVideoJob = async (job: VideoJob): Promise<void> => {
         }
 
         // Extract thumbnail
-        const thumbnailPath = await extractThumbnail({
+        const thumbnailPath = await extractThumbnailFromVideo({
             sourcePath: rawFilePath,
             outputDir: mediaRoot,
         });

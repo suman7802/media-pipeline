@@ -17,5 +17,6 @@
     "metrics_api": "Metrics API",
     "metrics_api_message": "You can view the API metrics",
     "metrics_api_loop_message": "Metrics API: {{time}} seconds (Loop {{loop}})",
-    "video_streaming": "Video streaming"
+    "video_streaming": "Video streaming",
+    "media_list_fetched_successfully": "Media list fetched successfully"
 }

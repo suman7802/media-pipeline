@@ -62,5 +62,23 @@ export const createRenditions = async ({ sourcePath, outputDir }: { sourcePath: 
             });
         }
     }
+
     return results;
+};
+
+/**
+ * Extracts a single thumbnail from a source image.
+ *
+ * @param {object} params - The thumbnail extraction parameters.
+ * @param {string} params.sourcePath - The absolute path to the source image file.
+ * @param {string} params.outputDir - The absolute path to the output directory for the thumbnail.
+ * @returns {Promise<string>} The path to the created thumbnail.
+ */
+export const extractThumbnailFromImage = async ({ sourcePath, outputDir }: { sourcePath: string; outputDir: string }): Promise<string> => {
+    const thumbDir = path.join(outputDir, 'thumbs');
+    await makeDir(thumbDir);
+    const outputPath = path.join(thumbDir, 'thumbnail.jpg');
+
+    await sharp(sourcePath).resize({ width: 200, withoutEnlargement: true }).jpeg({ quality: 80, progressive: true }).toFile(outputPath);
+    return outputPath;
 };

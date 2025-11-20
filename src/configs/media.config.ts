@@ -11,3 +11,4 @@ export const IMAGE_SIZES = [3840, 2560, 1920, 1280, 854];
 export const MANIFEST_FILENAME = 'manifest.json';
 export const JOB_QUEUE_FILENAME = 'jobs.jsonl';
 export const VIDEO_CHUNK_SIZE_BYTES = 4 * 1024 * 1024; // 4 MB
+export const MAX_MEDIA_UPLOAD_SIZE_BYTES = 100 * 1024 * 1024; // 100 MB

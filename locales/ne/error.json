@@ -34,5 +34,9 @@
     "internal_error_suggestion": "कृपया पछि पुन: प्रयास गर्नुहोस् वा समस्या जारी रहेमा समर्थनलाई सम्पर्क गर्नुहोस्।",
     "range_not_satisfiable_message": "अनुरोध गरिएको दायरा सन्तुष्ट छैन।",
     "range_not_satisfiable_details": "तपाईंले अनुरोध गरेको दायरा उपलब्ध फाइल साइज भित्र छैन।",
-    "range_not_satisfiable_suggestion": "कृपया दायरा हेडर जाँच गर्नुहोस् र पुन: प्रयास गर्नुहोस्।"
+    "range_not_satisfiable_suggestion": "कृपया दायरा हेडर जाँच गर्नुहोस् र पुन: प्रयास गर्नुहोस्।",
+    "media_type_not_supported_message": "मिडिया प्रकार समर्थित छैन।",
+    "media_type_not_supported_details": "तपाईंले अपलोड गर्न खोजिरहेको मिडिया प्रकार समर्थित छैन।",
+    "media_type_not_supported_suggestion": "कृपया समर्थित मिडिया प्रकार अपलोड गर्नुहोस् र पुन: प्रयास गर्नुहोस्।",
+    "media_list_fetched_successfully": "मिडिया सूची सफलतापूर्वक प्राप्त भयो"
 }

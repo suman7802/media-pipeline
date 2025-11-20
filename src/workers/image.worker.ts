@@ -1,8 +1,11 @@
+import { log } from 'console';
+
 import logger from '@/loggers/winston.logger';
 import { MediaManifest } from '@/schemas/media.schema';
 import { ImageJob } from '@/schemas/queue.schema';
-import { createRenditions } from '@/services/image.service';
+import { createRenditions, extractThumbnailFromImage } from '@/services/image.service';
 import { getMediaRoot, updateManifest } from '@/services/media.service';
+import { extractThumbnailFromVideo } from '@/services/video.service';
 
 /**
  * Processes a single image job.
@@ -28,9 +31,15 @@ export const processImageJob = async (job: ImageJob): Promise<void> => {
             throw new Error('All image resizings failed.');
         }
 
+        const thumbnailPath = await extractThumbnailFromImage({
+            sourcePath: rawFilePath,
+            outputDir: mediaRoot,
+        });
+
         // Update manifest with final data
         const finalUpdate: Partial<MediaManifest> = {
             status: 'completed',
+            thumbnailPath: thumbnailPath,
             images: imageRenditions,
         };
 
